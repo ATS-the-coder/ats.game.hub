@@ -116,7 +116,7 @@ footer h3 {
 
   <button onclick="gamesPage()">🎮 Games</button>
   <button onclick="moviesPage()">🍿 Movies</button>
-
+  <button onclick="notesPage()">📝 Notes</button>
 
 </header>
 
@@ -126,6 +126,25 @@ footer h3 {
     <h2>Welcome 👋</h2>
     <p>Games, movies, and more!</p>
   </div>
+
+  <div id="notes" style="display:none;">
+
+  <h2>📝 Notes</h2>
+
+  <textarea
+    id="notesBox"
+    placeholder="Write something here..."
+    rows="12">
+  </textarea>
+
+  <br><br>
+
+  <button onclick="saveNotes()">💾 SAVE</button>
+  <button onclick="clearNotes()">🗑️ CLEAR</button>
+
+  <p id="notesStatus"></p>
+
+</div>
 
   <div id="games">
     <h2>🎮 Games</h2>
@@ -263,6 +282,33 @@ footer h3 {
 
 
 <script>
+
+  function notesPage() {
+  document.getElementById("home").style.display = "none";
+  document.getElementById("games").style.display = "none";
+  document.getElementById("movies").style.display = "none";
+  document.getElementById("notes").style.display = "block";
+
+  document.getElementById("notesBox").value =
+    localStorage.getItem("atsNotes") || "";
+}
+
+function saveNotes() {
+  let notes = document.getElementById("notesBox").value;
+
+  localStorage.setItem("atsNotes", notes);
+
+  document.getElementById("notesStatus").textContent =
+    "✅ Notes saved!";
+}
+
+function clearNotes() {
+  document.getElementById("notesBox").value = "";
+  localStorage.removeItem("atsNotes");
+
+  document.getElementById("notesStatus").textContent =
+    "🗑️ Notes cleared!";
+}
 
   function wallpaperPicker() {
   let choice = prompt(
