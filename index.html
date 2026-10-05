@@ -121,6 +121,13 @@
     <div class="games">
 
       <div class="card">
+  <div class="emoji">🎨</div>
+  <h2>Wallpapers</h2>
+  <p>Choose your website background</p>
+  <button onclick="wallpaperPicker()">🎨 CHOOSE</button>
+</div>
+
+      <div class="card">
         <div class="emoji">🖱️</div>
         <h2>Clicker</h2>
         <p id="clickScore">Clicks: 0</p>
@@ -244,6 +251,36 @@
 
 
 <script>
+
+  function wallpaperPicker() {
+  let choice = prompt(
+    "🎨 Choose a wallpaper:\n\n" +
+    "1 = 🦈 Shark\n" +
+    "2 = 🐆 Leopard\n" +
+    "3 = 🤝 Hands\n" +
+    "4 = 🌕 Homer Moon\n" +
+    "5 = 🚗 SpongeBob & Patrick"
+  );
+
+  let wallpapers = {
+    "1": "shark.webp",
+    "2": "leopard.webp",
+    "3": "hands.webp",
+    "4": "homer-moon.webp",
+    "5": "spongebob-cars.webp"
+  };
+
+  if (wallpapers[choice]) {
+    document.body.style.backgroundImage =
+      "url('" + wallpapers[choice] + "')";
+
+    document.body.style.backgroundSize = "cover";
+    document.body.style.backgroundPosition = "center";
+    document.body.style.backgroundAttachment = "fixed";
+  } else {
+    alert("❌ Invalid choice!");
+  }
+}
 
 let clicks = 0;
 
