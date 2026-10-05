@@ -78,6 +78,22 @@
     #movies {
       display: none;
     }
+
+    .movie-player {
+      max-width: 900px;
+      margin: 30px auto;
+      background: #171725;
+      padding: 20px;
+      border-radius: 20px;
+    }
+
+    .movie-player iframe {
+      width: 100%;
+      max-width: 800px;
+      aspect-ratio: 16 / 9;
+      border: 0;
+      border-radius: 12px;
+    }
   </style>
 </head>
 
@@ -89,37 +105,13 @@
   <button onclick="gamesPage()">🎮 Games</button>
   <button onclick="moviesPage()">🍿 Movies</button>
 
-<script>
-function moviesPage() {
-  document.body.innerHTML = `
-    <h1>🍿 Movies</h1>
+  <a href="https://www.geo-fs.com/geofs.php?v=3.9" target="_blank">
+    <button>✈️ Play Flight Sim</button>
+  </a>
 
-    <h2>📺 Unspeakable Videos</h2>
-
-    <iframe
-      width="560"
-      height="315"
-      src="https://www.youtube.com/embed/videoseries?list=PL7cUhuXpa0_0bFcWDpYmp0X4d3kicfH1k"
-      title="Unspeakable Playlist"
-      frameborder="0"
-      allowfullscreen>
-    </iframe>
-
-    <br><br>
-
-    <button onclick="location.reload()">🏠 Back</button>
-  `;
-}
-</script>
-  
-<a href="https://https://www.geo-fs.com/geofs.php?v=3.9" target="_blank">
-  <button>✈️ Play flight sim</button>
-</a>
-  
   <a href="https://minecrafteaglercraft.gitlab.io/go/minecraft-1.5.2/" target="_blank">
-  <button>⛏️ Play Minecraft</button>
-</a>
-
+    <button>⛏️ Play Minecraft</button>
+  </a>
 </header>
 
 <div class="page">
@@ -169,11 +161,21 @@ function moviesPage() {
   </div>
 
   <div id="movies">
+
     <h2>🍿 Movies</h2>
-    <div class="card">
-      <h2>🎬 Movie Zone</h2>
-      <p>Movie section coming soon!</p>
+
+    <div class="movie-player">
+
+      <h2>📺 Unspeakable Videos</h2>
+
+      <iframe
+        src="https://www.youtube.com/embed/videoseries?list=PL7cUhuXpa0_0bFcWDpYmp0X4d3kicfH1k"
+        title="Unspeakable Playlist"
+        allowfullscreen>
+      </iframe>
+
     </div>
+
   </div>
 
 </div>
