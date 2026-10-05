@@ -103,16 +103,12 @@
   <h1>🎮 ATS's Entertainment and games Hub</h1>
 
   <button onclick="gamesPage()">🎮 Games</button>
-  <button onclick="moviesPage()">🍿 movies</button>
+  <button onclick="moviesPage()">🍿 Movies</button>
 
   <a href="https://www.geo-fs.com/geofs.php?v=3.9" target="_blank">
     <button>✈️ Play Flight Sim</button>
   </a>
-  
-  <a href="https://amber-echo-8217.de.deplexo.com/desktop.html" target="_blank">
-    <button>🤝 My friends website</button>
-  </a>
-  
+
   <a href="https://minecrafteaglercraft.gitlab.io/go/minecraft-1.5.2/" target="_blank">
     <button>⛏️ Play Minecraft</button>
   </a>
@@ -164,17 +160,58 @@
     </div>
   </div>
 
+
+  <!-- MOVIES / CREATOR SECTION -->
+
   <div id="movies">
 
-    <h2>🍿 Movies</h2>
+    <h2>🍿 Creator Videos</h2>
 
-    <div class="movie-player">
+    <div class="games">
 
-      <h2>📺 Unspeakable Videos</h2>
+      <div class="card">
+        <div class="emoji">📺</div>
+        <h2>Unspeakable</h2>
+        <p>Watch Unspeakable videos</p>
+
+        <button onclick="showPlaylist('PL7cUhuXpa0_0bFcWDpYmp0X4d3kicfH1k', 'Unspeakable')">
+          ▶️ Watch
+        </button>
+      </div>
+
+
+      <div class="card">
+        <div class="emoji">😂</div>
+        <h2>Joe Bart</h2>
+        <p>Watch Joe Bart videos</p>
+
+        <button onclick="showPlaylist('PLRURgcJQ51aU', 'Joe Bart')">
+          ▶️ Watch
+        </button>
+      </div>
+
+
+      <div class="card">
+        <div class="emoji">🤣</div>
+        <h2>ImBrandonFarris</h2>
+        <p>Watch ImBrandonFarris videos</p>
+
+        <button onclick="showPlaylist('PLHk21dlwhpXo', 'ImBrandonFarris')">
+          ▶️ Watch
+        </button>
+      </div>
+
+    </div>
+
+
+    <div class="movie-player" id="playlistViewer" style="display:none;">
+
+      <h2 id="playlistTitle">📺 Videos</h2>
 
       <iframe
-        src="https://www.youtube.com/embed/videoseries?list=PL7cUhuXpa0_0bFcWDpYmp0X4d3kicfH1k"
-        title="Unspeakable Playlist"
+        id="playlistFrame"
+        src=""
+        title="Creator Playlist"
         allowfullscreen>
       </iframe>
 
@@ -184,6 +221,7 @@
 
 </div>
 
+
 <script>
 
 let clicks = 0;
@@ -192,35 +230,66 @@ let reactionReady = false;
 let reactionStart = 0;
 let reactionTimer = null;
 
+
 function gamesPage() {
+
   document.getElementById("home").style.display = "block";
   document.getElementById("games").style.display = "block";
   document.getElementById("movies").style.display = "none";
+
 }
 
+
 function moviesPage() {
+
   document.getElementById("home").style.display = "none";
   document.getElementById("games").style.display = "none";
   document.getElementById("movies").style.display = "block";
+
 }
+
+
+function showPlaylist(playlistId, creatorName) {
+
+  document.getElementById("playlistViewer").style.display = "block";
+
+  document.getElementById("playlistTitle").textContent =
+    "📺 " + creatorName + " Videos";
+
+  document.getElementById("playlistFrame").src =
+    "https://www.youtube.com/embed/videoseries?list=" + playlistId;
+
+}
+
 
 function clickGame() {
+
   clicks = clicks + 1;
+
   document.getElementById("clickScore").textContent =
     "Clicks: " + clicks;
+
 }
 
+
 function guessGame() {
+
   let number = Math.floor(Math.random() * 10) + 1;
 
   let guess = prompt("Guess a number from 1 to 10!");
 
   if (Number(guess) === number) {
+
     alert("🎉 YOU GOT IT!");
+
   } else {
+
     alert("❌ Nope! The number was " + number);
+
   }
+
 }
+
 
 function reactionGame() {
 
@@ -240,9 +309,11 @@ function reactionGame() {
 
   clearTimeout(reactionTimer);
 
+
   reactionTimer = setTimeout(function() {
 
     reactionReady = true;
+
     reactionStart = performance.now();
 
     box.style.background = "#168a3a";
@@ -252,11 +323,14 @@ function reactionGame() {
       "CLICK NOW!";
 
   }, Math.floor(Math.random() * 3000) + 1500);
+
 }
+
 
 function reactionClick() {
 
   let box = document.getElementById("reactionBox");
+
 
   if (!reactionReady) {
 
@@ -276,7 +350,9 @@ function reactionClick() {
     }
 
     return;
+
   }
+
 
   let time = Math.round(performance.now() - reactionStart);
 
