@@ -325,7 +325,7 @@ footer h3 {
 
 <script>
 
-  function notesPage() {
+function notesPage() {
   document.getElementById("home").style.display = "none";
   document.getElementById("games").style.display = "none";
   document.getElementById("movies").style.display = "none";
@@ -340,14 +340,15 @@ function saveNotes() {
 
   localStorage.setItem("atsNotes", notes);
 
- let status = document.getElementById("notesStatus");
+  let status = document.getElementById("notesStatus");
 
-status.textContent = "✅ Notes saved!";
-status.style.transform = "scale(1.15)";
+  status.textContent = "✅ Notes saved!";
+  status.style.transform = "scale(1.15)";
 
-setTimeout(function() {
-  status.style.transform = "scale(1)";
-}, 200);
+  setTimeout(function() {
+    status.style.transform = "scale(1)";
+  }, 200);
+}
 
 function clearNotes() {
   document.getElementById("notesBox").value = "";
@@ -357,7 +358,7 @@ function clearNotes() {
     "🗑️ Notes cleared!";
 }
 
-  function wallpaperPicker() {
+function wallpaperPicker() {
   let choice = prompt(
     "🎨 Choose a wallpaper:\n\n" +
     "1 = 🦈 Shark\n" +
@@ -388,21 +389,18 @@ function clearNotes() {
 }
 
 let clicks = 0;
-
 let reactionReady = false;
 let reactionStart = 0;
 let reactionTimer = null;
 
-
 function gamesPage() {
-
   document.getElementById("home").style.display = "block";
   document.getElementById("games").style.display = "block";
   document.getElementById("movies").style.display = "none";
-
+  document.getElementById("notes").style.display = "none";
 }
 
-  function calculatorGame() {
+function calculatorGame() {
   let first = prompt("Enter the first number:");
   let operator = prompt("Enter +, -, *, or /:");
   let second = prompt("Enter the second number:");
@@ -433,16 +431,13 @@ function gamesPage() {
 }
 
 function moviesPage() {
-
   document.getElementById("home").style.display = "none";
   document.getElementById("games").style.display = "none";
+  document.getElementById("notes").style.display = "none";
   document.getElementById("movies").style.display = "block";
-
 }
 
-
 function showPlaylist(playlistId, creatorName) {
-
   document.getElementById("playlistViewer").style.display = "block";
 
   document.getElementById("playlistTitle").textContent =
@@ -450,41 +445,28 @@ function showPlaylist(playlistId, creatorName) {
 
   document.getElementById("playlistFrame").src =
     "https://www.youtube.com/embed/videoseries?list=" + playlistId;
-
 }
 
-
 function clickGame() {
-
   clicks = clicks + 1;
 
   document.getElementById("clickScore").textContent =
     "Clicks: " + clicks;
-
 }
 
-
 function guessGame() {
-
   let number = Math.floor(Math.random() * 10) + 1;
 
   let guess = prompt("Guess a number from 1 to 10!");
 
   if (Number(guess) === number) {
-
     alert("🎉 YOU GOT IT!");
-
   } else {
-
     alert("❌ Nope! The number was " + number);
-
   }
-
 }
 
-
 function reactionGame() {
-
   document.getElementById("game").style.display = "block";
 
   let box = document.getElementById("reactionBox");
@@ -501,9 +483,7 @@ function reactionGame() {
 
   clearTimeout(reactionTimer);
 
-
   reactionTimer = setTimeout(function() {
-
     reactionReady = true;
 
     reactionStart = performance.now();
@@ -513,21 +493,14 @@ function reactionGame() {
 
     document.getElementById("reactionText").textContent =
       "CLICK NOW!";
-
   }, Math.floor(Math.random() * 3000) + 1500);
-
 }
 
-
 function reactionClick() {
-
   let box = document.getElementById("reactionBox");
 
-
   if (!reactionReady) {
-
     if (box.textContent === "🔴 WAIT...") {
-
       clearTimeout(reactionTimer);
 
       box.style.background = "#9b2226";
@@ -538,13 +511,10 @@ function reactionClick() {
 
       document.getElementById("reactionResult").textContent =
         "Press PLAY to try again.";
-
     }
 
     return;
-
   }
-
 
   let time = Math.round(performance.now() - reactionStart);
 
@@ -558,11 +528,10 @@ function reactionClick() {
 
   document.getElementById("reactionResult").textContent =
     "Press PLAY to try again.";
-
 }
 
 </script>
-
+  
 <footer>
   <h3>🎬 Credits</h3>
   <p>Website created by ATS</p>
