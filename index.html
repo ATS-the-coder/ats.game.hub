@@ -252,6 +252,35 @@ function gamesPage() {
 
 }
 
+  function calculatorGame() {
+  let first = prompt("Enter the first number:");
+  let operator = prompt("Enter +, -, *, or /:");
+  let second = prompt("Enter the second number:");
+
+  first = Number(first);
+  second = Number(second);
+
+  if (isNaN(first) || isNaN(second)) {
+    alert("❌ Please enter numbers!");
+    return;
+  }
+
+  if (operator === "+") {
+    alert("🧮 Answer: " + (first + second));
+  } else if (operator === "-") {
+    alert("🧮 Answer: " + (first - second));
+  } else if (operator === "*") {
+    alert("🧮 Answer: " + (first * second));
+  } else if (operator === "/") {
+    if (second === 0) {
+      alert("❌ Can't divide by zero!");
+    } else {
+      alert("🧮 Answer: " + (first / second));
+    }
+  } else {
+    alert("❌ Invalid operator!");
+  }
+}
 
 function moviesPage() {
 
