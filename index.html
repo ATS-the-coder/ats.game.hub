@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Game Arcade</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: white;
+      text-align: center;
+    }
+
+    header {
+      padding: 30px;
+      background: #1d1d1d;
+    }
+
+    h1 {
+      margin: 0;
+    }
+
+    .games {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 40px;
+      flex-wrap: wrap;
+    }
+
+    .game {
+      background: #222;
+      padding: 20px;
+      border-radius: 15px;
+      width: 220px;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: 0;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    #gameScreen {
+      margin: 20px auto;
+      max-width: 600px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>🎮 My Game Arcade</h1>
+    <p>Welcome to my little game zone!</p>
+  </header>
+
+  <div class="games">
+
+    <div class="game">
+      <h2>Clicker</h2>
+      <p>Clicks: <span id="score">0</span></p>
+      <button onclick="clickGame()">CLICK!</button>
+    </div>
+
+    <div class="game">
+      <h2>Coming Soon</h2>
+      <p>More games soon 👀</p>
+    </div>
+
+  </div>
+
+  <script>
+    let score = 0;
+
+    function clickGame() {
+      score++;
+      document.getElementById("score").textContent = score;
+    }
+  </script>
+
+</body>
+</html>
