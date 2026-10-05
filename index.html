@@ -21,6 +21,48 @@
   color: #aaa;
 }
 
+#notes {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #171725;
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+}
+
+#notes h2 {
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+#notesBox {
+  width: 90%;
+  min-height: 300px;
+  padding: 20px;
+  background: #0b0b12;
+  color: white;
+  border: 2px solid #4b4bff;
+  border-radius: 15px;
+  font-size: 18px;
+  font-family: Arial, sans-serif;
+  resize: vertical;
+  outline: none;
+}
+
+#notesBox:focus {
+  box-shadow: 0 0 15px rgba(75, 75, 255, 0.5);
+}
+
+#notes button {
+  margin: 5px;
+}
+
+#notesStatus {
+  font-weight: bold;
+  min-height: 25px;
+  transition: 0.3s;
+}
+    
 footer h3 {
   color: white;
   font-size: 22px;
@@ -298,9 +340,14 @@ function saveNotes() {
 
   localStorage.setItem("atsNotes", notes);
 
-  document.getElementById("notesStatus").textContent =
-    "✅ Notes saved!";
-}
+ let status = document.getElementById("notesStatus");
+
+status.textContent = "✅ Notes saved!";
+status.style.transform = "scale(1.15)";
+
+setTimeout(function() {
+  status.style.transform = "scale(1)";
+}, 200);
 
 function clearNotes() {
   document.getElementById("notesBox").value = "";
