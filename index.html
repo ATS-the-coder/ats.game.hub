@@ -1,337 +1,261 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Entertainment Hub</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Entertainment Hub</title>
 
-<style>
-* {
-  box-sizing: border-box;
-}
+  <style>
+    body {
+      margin: 0;
+      background: #0b0b12;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
 
-body {
-  margin: 0;
-  background: #0b0b12;
-  color: white;
-  font-family: Arial, sans-serif;
-}
+    header {
+      background: #171725;
+      padding: 25px;
+    }
 
-header {
-  background: #151522;
-  padding: 25px;
-  text-align: center;
-}
+    button {
+      background: #4b4bff;
+      color: white;
+      border: 0;
+      padding: 12px 20px;
+      margin: 8px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+    }
 
-header h1 {
-  margin: 0;
-  font-size: 32px;
-}
+    button:hover {
+      background: #6868ff;
+    }
 
-nav {
-  margin-top: 15px;
-}
+    .page {
+      max-width: 1000px;
+      margin: auto;
+      padding: 30px 20px;
+    }
 
-nav button {
-  background: #292940;
-  color: white;
-  border: 0;
-  padding: 12px 20px;
-  margin: 5px;
-  border-radius: 10px;
-  cursor: pointer;
-}
+    .games {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
 
-.container {
-  max-width: 1100px;
-  margin: auto;
-  padding: 30px 20px;
-}
+    .card {
+      background: #171725;
+      padding: 25px;
+      border-radius: 15px;
+    }
 
-.hero {
-  text-align: center;
-  padding: 30px 0;
-}
+    .emoji {
+      font-size: 50px;
+    }
 
-.hero h2 {
-  font-size: 38px;
-}
+    #game {
+      display: none;
+      margin-top: 30px;
+      padding: 30px;
+      background: #171725;
+      border-radius: 20px;
+    }
 
-.search {
-  width: 100%;
-  max-width: 600px;
-  padding: 15px;
-  border-radius: 12px;
-  border: 1px solid #333;
-  background: #151522;
-  color: white;
-  font-size: 16px;
-}
+    #reactionBox {
+      height: 250px;
+      background: #33334a;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 35px;
+      cursor: pointer;
+    }
 
-.games {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-}
-
-.card {
-  background: #151522;
-  border: 1px solid #292940;
-  border-radius: 15px;
-  padding: 20px;
-  text-align: center;
-}
-
-.emoji {
-  font-size: 50px;
-}
-
-.card p {
-  color: #aaa;
-}
-
-.play {
-  width: 100%;
-  padding: 12px;
-  border: 0;
-  border-radius: 10px;
-  background: #4b4bff;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.movie {
-  background: #151522;
-  border-radius: 15px;
-  padding: 30px;
-  text-align: center;
-}
-
-footer {
-  text-align: center;
-  color: #777;
-  padding: 40px;
-}
-</style>
+    #movies {
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
 
 <header>
-<h1>🎮 My Entertainment Hub</h1>
+  <h1>🎮 My Entertainment Hub</h1>
 
-<nav>
-<button onclick="showGames()">🎮 Games</button>
-<button onclick="showMovies()">🍿 Movies</button>
-</nav>
+  <button onclick="gamesPage()">🎮 Games</button>
+  <button onclick="moviesPage()">🍿 Movies</button>
 </header>
 
-<div class="container">
+<div class="page">
 
-<div class="hero">
-<h2>Welcome 👋</h2>
-<p>Games, movies, and more!</p>
+  <div id="home">
+    <h2>Welcome 👋</h2>
+    <p>Games, movies, and more!</p>
+  </div>
 
-<input
-class="search"
-id="search"
-placeholder="🔎 Search games..."
-oninput="searchGames()">
+  <div id="games">
+    <h2>🎮 Games</h2>
+
+    <div class="games">
+
+      <div class="card">
+        <div class="emoji">🖱️</div>
+        <h2>Clicker</h2>
+        <p id="clickScore">Clicks: 0</p>
+        <button onclick="clickGame()">CLICK!</button>
+      </div>
+
+      <div class="card">
+        <div class="emoji">🔢</div>
+        <h2>Guess Number</h2>
+        <button onclick="guessGame()">PLAY</button>
+      </div>
+
+      <div class="card">
+        <div class="emoji">⚡</div>
+        <h2>Reaction Test</h2>
+        <button onclick="reactionGame()">PLAY</button>
+      </div>
+
+    </div>
+
+    <div id="game">
+      <h2>⚡ Reaction Test</h2>
+
+      <p id="reactionText">Press START</p>
+
+      <div id="reactionBox" onclick="reactionClick()">
+        START
+      </div>
+
+      <p id="reactionResult"></p>
+    </div>
+  </div>
+
+  <div id="movies">
+    <h2>🍿 Movies</h2>
+    <div class="card">
+      <h2>🎬 Movie Zone</h2>
+      <p>Movie section coming soon!</p>
+    </div>
+  </div>
+
 </div>
-
-<section id="gamesSection">
-
-<h2>🎮 Games</h2>
-
-<div class="games" id="gameList">
-
-<div class="card" data-name="Clicker Game">
-<div class="emoji">🖱️</div>
-<h3>Clicker Game</h3>
-<p>Click as fast as you can!</p>
-<button class="play" onclick="startClicker()">PLAY</button>
-</div>
-
-<div class="card" data-name="Guess The Number">
-<div class="emoji">🔢</div>
-<h3>Guess The Number</h3>
-<p>Guess the secret number.</p>
-<button class="play" onclick="guessNumber()">PLAY</button>
-</div>
-
-<div class="card" data-name="Reaction Test">
-<div class="emoji">⚡</div>
-<h3>Reaction Test</h3>
-<p>Test your reaction speed.</p>
-<button class="play" onclick="reactionTest()">PLAY</button>
-</div>
-
-</div>
-</section>
-
-<section id="moviesSection" style="display:none">
-
-<h2>🍿 Movies</h2>
-
-<div class="movie">
-<h2>🎬 Movie Zone</h2>
-<p>Movie section coming soon!</p>
-</div>
-
-</section>
-
-</div>
-
-<footer>
-Made with ❤️
-</footer>
 
 <script>
-
-function showGames() {
-document.getElementById("gamesSection").style.display = "block";
-document.getElementById("moviesSection").style.display = "none";
-}
-
-function showMovies() {
-document.getElementById("gamesSection").style.display = "none";
-document.getElementById("moviesSection").style.display = "block";
-}
-
-function searchGames() {
-
-const search =
-document.getElementById("search").value.toLowerCase();
-
-const cards =
-document.querySelectorAll(".card");
-
-cards.forEach(card => {
-
-const name =
-card.dataset.name.toLowerCase();
-
-card.style.display =
-name.includes(search) ? "block" : "none";
-
-});
-
-}
-
-function startClicker() {
 
 let clicks = 0;
 
-const game = window.open("", "_blank");
+let reactionReady = false;
+let reactionStart = 0;
+let reactionTimer = null;
 
-game.document.write(`
-<html>
-<head>
-<title>Clicker Game</title>
-<style>
-body {
-background:#0b0b12;
-color:white;
-font-family:Arial;
-text-align:center;
-padding-top:100px;
+function gamesPage() {
+  document.getElementById("home").style.display = "block";
+  document.getElementById("games").style.display = "block";
+  document.getElementById("movies").style.display = "none";
 }
-button {
-font-size:30px;
-padding:25px 50px;
-border:0;
-border-radius:15px;
+
+function moviesPage() {
+  document.getElementById("home").style.display = "none";
+  document.getElementById("games").style.display = "none";
+  document.getElementById("movies").style.display = "block";
 }
-</style>
-</head>
 
-<body>
+function clickGame() {
+  clicks = clicks + 1;
+  document.getElementById("clickScore").textContent =
+    "Clicks: " + clicks;
+}
 
-<h1>🖱️ Clicker Game</h1>
+function guessGame() {
+  let number = Math.floor(Math.random() * 10) + 1;
 
-<h2 id="score">Clicks: 0</h2>
+  let guess = prompt("Guess a number from 1 to 10!");
 
-<button id="click">CLICK!</button>
+  if (Number(guess) === number) {
+    alert("🎉 YOU GOT IT!");
+  } else {
+    alert("❌ Nope! The number was " + number);
+  }
+}
 
-<script>
-document.getElementById("click").onclick = function() {
-clicks++;
-document.getElementById("score").textContent =
-"Clicks: " + clicks;
-};
-<\/script>
+function reactionGame() {
+
+  document.getElementById("game").style.display = "block";
+
+  let box = document.getElementById("reactionBox");
+
+  box.style.background = "#9b2226";
+  box.textContent = "🔴 WAIT...";
+
+  document.getElementById("reactionText").textContent =
+    "Wait for green!";
+
+  document.getElementById("reactionResult").textContent = "";
+
+  reactionReady = false;
+
+  clearTimeout(reactionTimer);
+
+  reactionTimer = setTimeout(function() {
+
+    reactionReady = true;
+    reactionStart = performance.now();
+
+    box.style.background = "#168a3a";
+    box.textContent = "🟢 CLICK!";
+
+    document.getElementById("reactionText").textContent =
+      "CLICK NOW!";
+
+  }, Math.floor(Math.random() * 3000) + 1500);
+}
+
+function reactionClick() {
+
+  let box = document.getElementById("reactionBox");
+
+  if (!reactionReady) {
+
+    if (box.textContent === "🔴 WAIT...") {
+
+      clearTimeout(reactionTimer);
+
+      box.style.background = "#9b2226";
+      box.textContent = "❌ TOO EARLY!";
+
+      document.getElementById("reactionText").textContent =
+        "You clicked too early!";
+
+      document.getElementById("reactionResult").textContent =
+        "Press PLAY to try again.";
+
+    }
+
+    return;
+  }
+
+  let time = Math.round(performance.now() - reactionStart);
+
+  reactionReady = false;
+
+  box.style.background = "#33334a";
+  box.textContent = time + " ms ⚡";
+
+  document.getElementById("reactionText").textContent =
+    "Nice!";
+
+  document.getElementById("reactionResult").textContent =
+    "Press PLAY to try again.";
+
+}
+
+</script>
 
 </body>
 </html>
-`);
-
-game.document.close();
-
-}
-
-function guessNumber() {
-
-const secret =
-Math.floor(Math.random() * 10) + 1;
-
-const answer =
-prompt("Guess a number from 1 to 10!");
-
-if (Number(answer) === secret) {
-alert("🎉 You got it!");
-} else {
-alert("❌ Nope! The number was " + secret);
-}
-
-}
-
-function reactionTest() {
-
-const game = window.open("", "_blank");
-
-game.document.write(`
-<html>
-
-<head>
-
-<title>Reaction Test</title>
-
-<style>
-
-body {
-margin:0;
-background:#151522;
-color:white;
-font-family:Arial;
-text-align:center;
-}
-
-#game {
-height:100vh;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-}
-
-#box {
-width:80%;
-max-width:600px;
-height:300px;
-border-radius:20px;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:40px;
-font-weight:bold;
-background:#33334a;
-cursor:pointer;
-}
-
-button {
-margin-top:20px;
-padding:15px 30px;
-font-size:20px;
-border:0;
-border-radius:
