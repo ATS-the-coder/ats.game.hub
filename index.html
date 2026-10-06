@@ -291,6 +291,111 @@ footer h3 {
 
       <p id="reactionResult"></p>
     </div>
+
+function openGame(id) {
+  document.querySelectorAll(".arcade-panel").forEach(function(game) {
+    game.style.display = "none";
+  });
+
+  document.getElementById(id).style.display = "block";
+}
+
+/* 🪨📄✂️ ROCK PAPER SCISSORS */
+
+let rpsYou = 0;
+let rpsComputer = 0;
+
+function playRPS(choice) {
+  let choices = ["rock", "paper", "scissors"];
+  let computer = choices[Math.floor(Math.random() * 3)];
+
+  let result;
+
+  if (choice === computer) {
+    result = "🤝 DRAW!";
+  } else if (
+    (choice === "rock" && computer === "scissors") ||
+    (choice === "paper" && computer === "rock") ||
+    (choice === "scissors" && computer === "paper")
+  ) {
+    rpsYou++;
+    result = "🎉 YOU WIN!";
+  } else {
+    rpsComputer++;
+    result = "💀 COMPUTER WINS!";
+  }
+
+  document.getElementById("rpsResult").textContent =
+    result + " Computer chose " + computer;
+
+  document.getElementById("rpsScore").textContent =
+    "You: " + rpsYou + " | Computer: " + rpsComputer;
+}
+
+/* 🃏 MEMORY MATCH */
+
+let memoryFirst = null;
+let memoryLocked = false;
+
+function startMemory() {
+  let symbols = [
+    "🍕","🍕","🚀","🚀",
+    "🐸","🐸","🔥","🔥",
+    "🎮","🎮","👽","👽",
+    "⚡","⚡","🍔","🍔"
+  ];
+
+  symbols.sort(function() {
+    return Math.random() - 0.5;
+  });
+
+  memoryFirst = null;
+  memoryLocked = false;
+
+  let grid = document.getElementById("memoryGrid");
+  grid.innerHTML = "";
+
+  symbols.forEach(function(symbol) {
+    let card = document.createElement("button");
+
+    card.className = "memory-card";
+    card.textContent = "❓";
+    card.dataset.symbol = symbol;
+
+    card.onclick = function() {
+      if (memoryLocked || card.classList.contains("matched")) {
+        return;
+      }
+
+      card.textContent = symbol;
+
+      if (memoryFirst === null) {
+        memoryFirst = card;
+        return;
+      }
+
+      if (memoryFirst.dataset.symbol === symbol) {
+        memoryFirst.classList.add("matched");
+        card.classList.add("matched");
+        memoryFirst = null;
+      } else {
+        memoryLocked = true;
+
+        let first = memoryFirst;
+
+        setTimeout(function() {
+          first.textContent = "❓";
+          card.textContent = "❓";
+          memoryFirst = null;
+          memoryLocked = false;
+        }, 700);
+      }
+    };
+
+    grid.appendChild(card);
+  });
+}
+    
   </div>
 
 
