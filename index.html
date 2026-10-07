@@ -768,11 +768,270 @@ function startMemory() {
   });
 } 
 
+ <!-- 🐍 SNAKE -->
+
+<div id="snakeGame" style="display:none; margin-top:30px; padding:25px; background:#171725; border-radius:20px;">
+
+  <h2>🐍 Snake</h2>
+
+  <p id="snakeScore">Score: 0</p>
+
+  <canvas
+    id="snakeCanvas"
+    width="400"
+    height="400"
+    style="background:#0b0b12; border:2px solid #4b4bff; max-width:100%; touch-action:none;">
+  </canvas>
+
+  <br><br>
+
+  <button onclick="startSnake()">🔄 START / RESTART</button>
+
+  <p>⬆️ ⬇️ ⬅️ ➡️ Use the arrow keys</p>
+
+</div>
+
+<script>
+
+let snake = [];
+let snakeFood = {};
+let snakeDirection = "right";
+let snakeNextDirection = "right";
+let snakeTimer = null;
+let snakeScore = 0;
+
+function startSnake() {
+
+  clearInterval(snakeTimer);
+
+  snake = [
+    {x: 200, y: 200},
+    {x: 180, y: 200},
+    {x: 160, y: 200}
+  ];
+
+  snakeDirection = "right";
+  snakeNextDirection = "right";
+  snakeScore = 0;
+
+  document.getElementById("snakeScore").textContent =
+    "Score: 0";
+
+  spawnSnakeFood();
+  drawSnake();
+
+  snakeTimer = setInterval(
+    updateSnake,
+    120
+  );
+}
+
+
+function spawnSnakeFood() {
+
+  snakeFood = {
+    x: Math.floor(Math.random() * 20) * 20,
+    y: Math.floor(Math.random() * 20) * 20
+  };
+
+  for (let part of snake) {
+
+    if (
+      part.x === snakeFood.x &&
+      part.y === snakeFood.y
+    ) {
+
+      spawnSnakeFood();
+      return;
+    }
+  }
+}
+
+
+function updateSnake() {
+
+  snakeDirection = snakeNextDirection;
+
+  let head = {
+    x: snake[0].x,
+    y: snake[0].y
+  };
+
+
+  if (snakeDirection === "up") {
+    head.y -= 20;
+  }
+
+  if (snakeDirection === "down") {
+    head.y += 20;
+  }
+
+  if (snakeDirection === "left") {
+    head.x -= 20;
+  }
+
+  if (snakeDirection === "right") {
+    head.x += 20;
+  }
+
+
+  /* WALL COLLISION */
+
+  if (
+    head.x < 0 ||
+    head.x >= 400 ||
+    head.y < 0 ||
+    head.y >= 400
+  ) {
+
+    snakeGameOver();
+    return;
+  }
+
+
+  /* BODY COLLISION */
+
+  for (let part of snake) {
+
+    if (
+      head.x === part.x &&
+      head.y === part.y
+    ) {
+
+      snakeGameOver();
+      return;
+    }
+  }
+
+
+  snake.unshift(head);
+
+
+  /* FOOD */
+
+  if (
+    head.x === snakeFood.x &&
+    head.y === snakeFood.y
+  ) {
+
+    snakeScore += 10;
+
+    document.getElementById("snakeScore").textContent =
+      "Score: " + snakeScore;
+
+    spawnSnakeFood();
+
+  } else {
+
+    snake.pop();
+
+  }
+
+
+  drawSnake();
+}
+
+
+function drawSnake() {
+
+  let canvas =
+    document.getElementById("snakeCanvas");
+
+  if (!canvas) return;
+
+  let ctx =
+    canvas.getContext("2d");
+
+  ctx.clearRect(
+    0,
+    0,
+    400,
+    400
+  );
+
+
+  /* FOOD */
+
+  ctx.fillStyle = "#ff3333";
+
+  ctx.fillRect(
+    snakeFood.x,
+    snakeFood.y,
+    18,
+    18
+  );
+
+
+  /* SNAKE */
+
+  for (let i = 0; i < snake.length; i++) {
+
+    if (i === 0) {
+      ctx.fillStyle = "#66ff66";
+    } else {
+      ctx.fillStyle = "#22aa44";
+    }
+
+    ctx.fillRect(
+      snake[i].x,
+      snake[i].y,
+      18,
+      18
+    );
+  }
+}
+
+
+function snakeGameOver() {
+
+  clearInterval(snakeTimer);
+
+  alert(
+    "🐍 GAME OVER!\n\nScore: " +
+    snakeScore
+  );
+}
+
+
+/* KEYBOARD CONTROLS */
+
+document.addEventListener(
+  "keydown",
+  function(event) {
+
+    if (event.key === "ArrowUp" &&
+        snakeDirection !== "down") {
+
+      snakeNextDirection = "up";
+    }
+
+    if (event.key === "ArrowDown" &&
+        snakeDirection !== "up") {
+
+      snakeNextDirection = "down";
+    }
+
+    if (event.key === "ArrowLeft" &&
+        snakeDirection !== "right") {
+
+      snakeNextDirection = "left";
+    }
+
+    if (event.key === "ArrowRight" &&
+        snakeDirection !== "left") {
+
+      snakeNextDirection = "right";
+    }
+
+  }
+);
+  
+
 </script>
   
 <footer>
   <h3>🎬 Credits</h3>
-  <p>Website created by ATS</p>
+  <p>Website created by Alexander</p>
   <p>Made with HTML, CSS & JavaScript ❤️</p>
   <p>Thanks for visiting! 🔥</p>
 </footer>
