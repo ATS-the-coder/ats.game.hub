@@ -1,1040 +1,1854 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ATS's Entertainment and games Hub</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ATS's Entertainment and Games Hub</title>
 
-  <style>
-    body {
-      margin: 0;
-      background: #0b0b12;
-      color: white;
-      font-family: Arial, sans-serif;
-      text-align: center;
-    }
-
-    footer {
-  margin-top: 50px;
-  padding: 30px;
-  background: #171725;
-  color: #aaa;
+<style>
+body{
+  margin:0;
+  background:#0b0b12;
+  color:white;
+  font-family:Arial,sans-serif;
+  text-align:center;
 }
 
-#notes {
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 30px;
-  background: #171725;
-  border-radius: 20px;
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+header{
+  background:#171725;
+  padding:25px;
 }
 
-#notes h2 {
-  font-size: 30px;
-  margin-bottom: 20px;
+button{
+  background:#4b4bff;
+  color:white;
+  border:0;
+  padding:12px 20px;
+  margin:8px;
+  border-radius:10px;
+  cursor:pointer;
+  font-size:16px;
 }
 
-#notesBox {
-  width: 90%;
-  min-height: 300px;
-  padding: 20px;
-  background: #0b0b12;
-  color: white;
-  border: 2px solid #4b4bff;
-  border-radius: 15px;
-  font-size: 18px;
-  font-family: Arial, sans-serif;
-  resize: vertical;
-  outline: none;
+button:hover{
+  background:#6868ff;
 }
 
-#notesBox:focus {
-  box-shadow: 0 0 15px rgba(75, 75, 255, 0.5);
+.page{
+  max-width:1000px;
+  margin:auto;
+  padding:30px 20px;
 }
 
-#notes button {
-  margin: 5px;
+.games{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
 }
 
-#notesStatus {
-  font-weight: bold;
-  min-height: 25px;
-  transition: 0.3s;
-}
-    
-footer h3 {
-  color: white;
-  font-size: 22px;
+.card{
+  background:#171725;
+  padding:25px;
+  border-radius:15px;
 }
 
-    header {
-      background: #171725;
-      padding: 25px;
-    }
-
-    button {
-      background: #4b4bff;
-      color: white;
-      border: 0;
-      padding: 12px 20px;
-      margin: 8px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-
-    button:hover {
-      background: #6868ff;
-    }
-
-    .page {
-      max-width: 1000px;
-      margin: auto;
-      padding: 30px 20px;
-    }
-
-    .games {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-    }
-
-    .card {
-      background: #171725;
-      padding: 25px;
-      border-radius: 15px;
-    }
-
-    .emoji {
-      font-size: 50px;
-    }
-
-    #game {
-      display: none;
-      margin-top: 30px;
-      padding: 30px;
-      background: #171725;
-      border-radius: 20px;
-    }
-
-    #reactionBox {
-      height: 250px;
-      background: #33334a;
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 35px;
-      cursor: pointer;
-    }
-
-    #movies {
-      display: none;
-    }
-
-    .movie-player {
-      max-width: 900px;
-      margin: 30px auto;
-      background: #171725;
-      padding: 20px;
-      border-radius: 20px;
-    }
-
-    .movie-player iframe {
-      width: 100%;
-      max-width: 800px;
-      aspect-ratio: 16 / 9;
-      border: 0;
-      border-radius: 12px;
-    }
-
-.arcade-panel {
-  display: none;
-  margin-top: 30px;
-  padding: 25px;
-  background: #171725;
-  border-radius: 20px;
+.emoji{
+  font-size:50px;
 }
 
-.game-canvas {
-  max-width: 100%;
-  background: #0b0b12;
-  border: 2px solid #4b4bff;
-  border-radius: 12px;
+#game{
+  display:none;
+  margin-top:30px;
+  padding:30px;
+  background:#171725;
+  border-radius:20px;
 }
 
-.memory-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 70px);
-  gap: 10px;
-  justify-content: center;
-  margin: 20px auto;
+#reactionBox{
+  height:250px;
+  background:#33334a;
+  border-radius:20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:35px;
+  cursor:pointer;
 }
 
-.memory-card {
-  width: 70px;
-  height: 70px;
-  margin: 0;
-  padding: 0;
-  font-size: 30px;
+#movies{
+  display:none;
 }
-    
-  </style>
+
+.movie-player{
+  max-width:900px;
+  margin:30px auto;
+  background:#171725;
+  padding:20px;
+  border-radius:20px;
+}
+
+.movie-player iframe{
+  width:100%;
+  max-width:800px;
+  aspect-ratio:16/9;
+  border:0;
+  border-radius:12px;
+}
+
+#notes{
+  max-width:900px;
+  margin:40px auto;
+  padding:30px;
+  background:#171725;
+  border-radius:20px;
+}
+
+#notesBox{
+  width:90%;
+  min-height:300px;
+  padding:20px;
+  background:#0b0b12;
+  color:white;
+  border:2px solid #4b4bff;
+  border-radius:15px;
+  font-size:18px;
+  font-family:Arial,sans-serif;
+  resize:vertical;
+}
+
+.arcade-panel{
+  display:none;
+  margin-top:30px;
+  padding:25px;
+  background:#171725;
+  border-radius:20px;
+}
+
+.game-canvas{
+  max-width:100%;
+  background:#0b0b12;
+  border:2px solid #4b4bff;
+  border-radius:12px;
+  touch-action:none;
+}
+
+.memory-grid{
+  display:grid;
+  grid-template-columns:repeat(4,70px);
+  gap:10px;
+  justify-content:center;
+  margin:20px auto;
+}
+
+.memory-card{
+  width:70px;
+  height:70px;
+  margin:0;
+  padding:0;
+  font-size:30px;
+}
+
+footer{
+  margin-top:50px;
+  padding:30px;
+  background:#171725;
+  color:#aaa;
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  <h1>🎮 ATS's Entertainment and games Hub</h1>
+<h1>🎮 ATS's Entertainment and Games Hub</h1>
 
-  <button onclick="gamesPage()">🎮 Games</button>
-  <button onclick="moviesPage()">🍿 Movies</button>
-  <button onclick="notesPage()">📝 Notes</button>
-
+<button onclick="gamesPage()">🎮 Games</button>
+<button onclick="moviesPage()">🍿 Movies</button>
+<button onclick="notesPage()">📝 Notes</button>
 </header>
 
 <div class="page">
 
-  <div id="home">
-    <h2>Welcome 👋</h2>
-    <p>Games, movies, and more!</p>
-  </div>
+<div id="home">
+<h2>Welcome 👋</h2>
+<p>Games, movies, and more!</p>
+</div>
 
-  <div id="notes" style="display:none;">
+<!-- NOTES -->
 
-  <h2>📝 Notes</h2>
+<div id="notes" style="display:none;">
 
-  <textarea
-    id="notesBox"
-    placeholder="Write something here..."
-    rows="12">
-  </textarea>
+<h2>📝 Notes</h2>
 
-  <br><br>
+<textarea
+id="notesBox"
+placeholder="Write something here..."
+rows="12"></textarea>
 
-  <button onclick="saveNotes()">💾 SAVE</button>
-  <button onclick="clearNotes()">🗑️ CLEAR</button>
+<br><br>
 
-  <p id="notesStatus"></p>
+<button onclick="saveNotes()">💾 SAVE</button>
+<button onclick="clearNotes()">🗑️ CLEAR</button>
+
+<p id="notesStatus"></p>
 
 </div>
 
-  <div id="games">
-    <h2>🎮 Games</h2>
+<!-- GAMES -->
 
-    <div class="games">
+<div id="games">
 
-      <div class="card">
-  <div class="emoji">🎨</div>
-  <h2>Wallpapers</h2>
-  <p>Choose your website background</p>
-  <button onclick="wallpaperPicker()">🎨 CHOOSE</button>
-</div>
+<h2>🎮 Games</h2>
 
-      <div class="card">
-        <div class="emoji">🖱️</div>
-        <h2>Clicker</h2>
-        <p id="clickScore">Clicks: 0</p>
-        <button onclick="clickGame()">CLICK!</button>
-      </div>
+<div class="games">
 
-      <div class="card">
-        <div class="emoji">🔢</div>
-        <h2>Guess Number</h2>
-        <button onclick="guessGame()">PLAY</button>
-      </div>
-
-      <div class="card">
-        <div class="emoji">⚡</div>
-        <h2>Reaction Test</h2>
-        <button onclick="reactionGame()">PLAY</button>
-      </div>
-      
 <div class="card">
-  <div class="emoji">✈️</div>
-  <h2>Flight Simulator</h2>
-  <p>Fly planes in GeoFS</p>
-
-  <a href="https://www.geo-fs.com/geofs.php?v=3.9" target="_blank">
-    <button>▶️ PLAY</button>
-  </a>
+<div class="emoji">🎨</div>
+<h2>Wallpapers</h2>
+<p>Choose your website background</p>
+<button onclick="wallpaperPicker()">🎨 CHOOSE</button>
 </div>
 
 <div class="card">
-  <div class="emoji">🎮</div>
-  <h2>Roblox</h2>
-  <p>Play Roblox</p>
-
-  <a href="https://finaltest.bjk.life/" target="_blank" rel="noopener noreferrer">
-    <button>▶️ PLAY </button>
-  </a>
-</div>      
-
-<div class="card">
-  <div class="emoji">⛏️</div>
-  <h2>Minecraft</h2>
-  <p>Play Minecraft</p>
-
-  <a href="https://minecrafteaglercraft.gitlab.io/go/minecraft-1.5.2/" target="_blank">
-    <button>▶️ PLAY</button>
-  </a>
-</div>
-
-  <div class="card">
-  <div class="emoji">🧮</div>
-  <h2>Calculator</h2>
-  <p>Do some quick math</p>
-
-  <button onclick="calculatorGame()">🧮 OPEN</button>
+<div class="emoji">🖱️</div>
+<h2>Clicker</h2>
+<p id="clickScore">Clicks: 0</p>
+<button onclick="clickGame()">CLICK!</button>
 </div>
 
 <div class="card">
-  <div class="emoji">🐍</div>
-  <h2>Snake</h2>
-  <p>Eat the food and grow!</p>
-  <button onclick="openGame('snakeGame')">▶️ PLAY</button>
+<div class="emoji">🔢</div>
+<h2>Guess Number</h2>
+<button onclick="guessGame()">PLAY</button>
 </div>
 
 <div class="card">
-  <div class="emoji">🧱</div>
-  <h2>Tetris</h2>
-  <p>Stack the blocks!</p>
-  <button onclick="openGame('tetrisGame')">▶️ PLAY</button>
+<div class="emoji">⚡</div>
+<h2>Reaction Test</h2>
+<button onclick="reactionGame()">PLAY</button>
 </div>
 
 <div class="card">
-  <div class="emoji">🏓</div>
-  <h2>Pong</h2>
-  <p>Beat the computer!</p>
-  <button onclick="openGame('pongGame')">▶️ PLAY</button>
+<div class="emoji">✈️</div>
+<h2>Flight Simulator</h2>
+<p>Fly planes in GeoFS</p>
+<a href="https://www.geo-fs.com/geofs.php?v=3.9"
+target="_blank"
+rel="noopener noreferrer">
+<button>▶️ PLAY</button>
+</a>
 </div>
 
 <div class="card">
-  <div class="emoji">🃏</div>
-  <h2>Memory Match</h2>
-  <p>Find the matching pairs!</p>
-  <button onclick="openGame('memoryGame'); startMemory()">▶️ PLAY</button>
+<div class="emoji">🎮</div>
+<h2>Roblox</h2>
+<p>Play Roblox</p>
+<a href="https://finaltest.bjk.life/"
+target="_blank"
+rel="noopener noreferrer">
+<button>▶️ PLAY</button>
+</a>
 </div>
 
 <div class="card">
-  <div class="emoji">🪨</div>
-  <h2>Rock Paper Scissors</h2>
-  <p>Beat the computer!</p>
-  <button onclick="openGame('rpsGame')">▶️ PLAY</button>
+<div class="emoji">⛏️</div>
+<h2>Minecraft</h2>
+<p>Play Minecraft</p>
+<a href="https://minecrafteaglercraft.gitlab.io/go/minecraft-1.5.2/"
+target="_blank"
+rel="noopener noreferrer">
+<button>▶️ PLAY</button>
+</a>
 </div>
-      
-    </div>
 
-    <div id="game">
-      <h2>⚡ Reaction Test</h2>
+<div class="card">
+<div class="emoji">🧮</div>
+<h2>Calculator</h2>
+<p>Do some quick math</p>
+<button onclick="calculatorGame()">🧮 OPEN</button>
+</div>
 
-      <p id="reactionText">Press START</p>
+<div class="card">
+<div class="emoji">🐍</div>
+<h2>Snake</h2>
+<p>Eat the food and grow!</p>
+<button onclick="openGame('snakeGame');startSnake()">▶️ PLAY</button>
+</div>
 
-      <div id="reactionBox" onclick="reactionClick()">
-        START
-      </div>
+<div class="card">
+<div class="emoji">🧱</div>
+<h2>Tetris</h2>
+<p>Stack the blocks!</p>
+<button onclick="openGame('tetrisGame');startTetris()">▶️ PLAY</button>
+</div>
 
-      <p id="reactionResult"></p>
-    </div>
+<div class="card">
+<div class="emoji">🏓</div>
+<h2>Pong</h2>
+<p>Beat the computer!</p>
+<button onclick="openGame('pongGame');startPong()">▶️ PLAY</button>
+</div>
+
+<div class="card">
+<div class="emoji">🃏</div>
+<h2>Memory Match</h2>
+<p>Find the matching pairs!</p>
+<button onclick="openGame('memoryGame');startMemory()">▶️ PLAY</button>
+</div>
+
+<div class="card">
+<div class="emoji">🪨</div>
+<h2>Rock Paper Scissors</h2>
+<p>Beat the computer!</p>
+<button onclick="openGame('rpsGame')">▶️ PLAY</button>
+</div>
+
+</div>
+
+<!-- REACTION -->
+
+<div id="game">
+
+<h2>⚡ Reaction Test</h2>
+
+<p id="reactionText">Press PLAY</p>
+
+<div id="reactionBox" onclick="reactionClick()">
+START
+</div>
+
+<p id="reactionResult"></p>
+
+</div>
+
+<!-- SNAKE -->
 
 <div id="snakeGame" class="arcade-panel">
-  <h2>🐍 Snake</h2>
-  <p id="snakeScore">Score: 0</p>
 
-  <canvas id="snakeCanvas" class="game-canvas"
-    width="400" height="400"></canvas>
+<h2>🐍 Snake</h2>
 
-  <br>
-  <button onclick="startSnake()">▶️ START</button>
+<p id="snakeScore">Score: 0</p>
+
+<canvas
+id="snakeCanvas"
+class="game-canvas"
+width="400"
+height="400">
+</canvas>
+
+<br>
+
+<button onclick="startSnake()">🔄 RESTART</button>
+
+<p>⬆️ ⬇️ ⬅️ ➡️ Use the arrow keys</p>
+
 </div>
+
+<!-- TETRIS -->
 
 <div id="tetrisGame" class="arcade-panel">
-  <h2>🧱 Tetris</h2>
 
-  <canvas id="tetrisCanvas" class="game-canvas"
-    width="240" height="400"></canvas>
+<h2>🧱 Tetris</h2>
 
-  <br>
-  <button onclick="alert('Tetris is next!')">▶️ START</button>
+<p id="tetrisScore">Score: 0</p>
+
+<canvas
+id="tetrisCanvas"
+class="game-canvas"
+width="240"
+height="400">
+</canvas>
+
+<br>
+
+<button onclick="startTetris()">🔄 RESTART</button>
+
+<p>⬅️ ➡️ Move | ⬇️ Drop | ⬆️ Rotate</p>
+
 </div>
+
+<!-- PONG -->
 
 <div id="pongGame" class="arcade-panel">
-  <h2>🏓 Pong</h2>
 
-  <p id="pongScore">You: 0 | Computer: 0</p>
+<h2>🏓 Pong</h2>
 
-  <canvas id="pongCanvas" class="game-canvas"
-    width="500" height="300"></canvas>
+<p id="pongScore">You: 0 | Computer: 0</p>
 
-  <br>
-  <button onclick="alert('Pong is next!')">▶️ START</button>
+<canvas
+id="pongCanvas"
+class="game-canvas"
+width="500"
+height="300">
+</canvas>
+
+<br>
+
+<button onclick="startPong()">🔄 RESTART</button>
+
+<p>Move your mouse or finger up and down.</p>
+
 </div>
+
+<!-- MEMORY -->
 
 <div id="memoryGame" class="arcade-panel">
-  <h2>🃏 Memory Match</h2>
 
-  <p>Find all the matching pairs!</p>
+<h2>🃏 Memory Match</h2>
 
-  <div id="memoryGrid" class="memory-grid"></div>
+<p>Find all the matching pairs!</p>
 
-  <button onclick="startMemory()">🔄 NEW GAME</button>
+<div id="memoryGrid" class="memory-grid"></div>
+
+<button onclick="startMemory()">🔄 NEW GAME</button>
+
 </div>
+
+<!-- RPS -->
 
 <div id="rpsGame" class="arcade-panel">
-  <h2>🪨📄✂️ Rock Paper Scissors</h2>
 
-  <p id="rpsResult">Choose your move!</p>
+<h2>🪨📄✂️ Rock Paper Scissors</h2>
 
-  <button onclick="playRPS('rock')">🪨</button>
-  <button onclick="playRPS('paper')">📄</button>
-  <button onclick="playRPS('scissors')">✂️</button>
+<p id="rpsResult">Choose your move!</p>
 
-  <p id="rpsScore">You: 0 | Computer: 0</p>
-</div>
-    
-  </div>
+<button onclick="playRPS('rock')">🪨</button>
+<button onclick="playRPS('paper')">📄</button>
+<button onclick="playRPS('scissors')">✂️</button>
 
-
-  <!-- MOVIES / CREATOR SECTION -->
-
-  <div id="movies">
-
-    <h2>🍿 Creator Videos</h2>
-
-    <div class="games">
-
-      <div class="card">
-        <div class="emoji">🐸</div>
-        <h2>Unspeakable</h2>
-        <p>Watch Unspeakable videos</p>
-
-        <button onclick="showPlaylist('PL7cUhuXpa0_0bFcWDpYmp0X4d3kicfH1k', 'Unspeakable')">
-          ▶️ Watch
-        </button>
-      </div>
-
-
-      <div class="card">
-        <div class="emoji">🗣️</div>
-        <h2>Joe Bart</h2>
-        <p>Watch Joe Bart videos</p>
-
-        <button onclick="showPlaylist('PLRURgcJQ51aU', 'Joe Bart')">
-          ▶️ Watch
-        </button>
-      </div>
-
-
-      <div class="card">
-        <div class="emoji">🤣</div>
-        <h2>ImBrandonFarris</h2>
-        <p>Watch ImBrandonFarris videos</p>
-
-        <button onclick="showPlaylist('PLHk21dlwhpXo', 'ImBrandonFarris')">
-          ▶️ Watch
-        </button>
-      </div>
-
-    </div>
-
-
-    <div class="movie-player" id="playlistViewer" style="display:none;">
-
-      <h2 id="playlistTitle">📺 Videos</h2>
-
-      <iframe
-        id="playlistFrame"
-        src=""
-        title="Creator Playlist"
-        allowfullscreen>
-      </iframe>
-
-    </div>
-
-  </div>
+<p id="rpsScore">You: 0 | Computer: 0</p>
 
 </div>
 
+</div>
 
-<script>
-
-function notesPage() {
-  document.getElementById("home").style.display = "none";
-  document.getElementById("games").style.display = "none";
-  document.getElementById("movies").style.display = "none";
-  document.getElementById("notes").style.display = "block";
-
-  document.getElementById("notesBox").value =
-    localStorage.getItem("atsNotes") || "";
-}
-
-function saveNotes() {
-  let notes = document.getElementById("notesBox").value;
-
-  localStorage.setItem("atsNotes", notes);
-
-  let status = document.getElementById("notesStatus");
-
-  status.textContent = "✅ Notes saved!";
-  status.style.transform = "scale(1.15)";
-
-  setTimeout(function() {
-    status.style.transform = "scale(1)";
-  }, 200);
-}
-
-function clearNotes() {
-  document.getElementById("notesBox").value = "";
-  localStorage.removeItem("atsNotes");
-
-  document.getElementById("notesStatus").textContent =
-    "🗑️ Notes cleared!";
-}
-
-function wallpaperPicker() {
-  let choice = prompt(
-    "🎨 Choose a wallpaper:\n\n" +
-    "1 = 🦈 Shark\n" +
-    "2 = 🐆 Leopard\n" +
-    "3 = 🤝 Hands\n" +
-    "4 = 🌕 Homer Moon\n" +
-    "5 = 🚗 SpongeBob & Patrick"
-  );
-
-  let wallpapers = {
-    "1": "shark.webp",
-    "2": "leopard.webp",
-    "3": "hands.webp",
-    "4": "homer-moon.webp",
-    "5": "spongebob-cars.webp"
-  };
-
-  if (wallpapers[choice]) {
-    document.body.style.backgroundImage =
-      "url('" + wallpapers[choice] + "')";
-
-    document.body.style.backgroundSize = "cover";
-    document.body.style.backgroundPosition = "center";
-    document.body.style.backgroundAttachment = "fixed";
-  } else {
-    alert("❌ Invalid choice!");
-  }
-}
-
-let clicks = 0;
-let reactionReady = false;
-let reactionStart = 0;
-let reactionTimer = null;
-
-function gamesPage() {
-  document.getElementById("home").style.display = "block";
-  document.getElementById("games").style.display = "block";
-  document.getElementById("movies").style.display = "none";
-  document.getElementById("notes").style.display = "none";
-}
-
-function calculatorGame() {
-  let first = prompt("Enter the first number:");
-  let operator = prompt("Enter +, -, *, or /:");
-  let second = prompt("Enter the second number:");
-
-  first = Number(first);
-  second = Number(second);
-
-  if (isNaN(first) || isNaN(second)) {
-    alert("❌ Please enter numbers!");
-    return;
-  }
-
-  if (operator === "+") {
-    alert("🧮 Answer: " + (first + second));
-  } else if (operator === "-") {
-    alert("🧮 Answer: " + (first - second));
-  } else if (operator === "*") {
-    alert("🧮 Answer: " + (first * second));
-  } else if (operator === "/") {
-    if (second === 0) {
-      alert("❌ Can't divide by zero!");
-    } else {
-      alert("🧮 Answer: " + (first / second));
-    }
-  } else {
-    alert("❌ Invalid operator!");
-  }
-}
+<!-- MOVIES -->
 
-function moviesPage() {
-  document.getElementById("home").style.display = "none";
-  document.getElementById("games").style.display = "none";
-  document.getElementById("notes").style.display = "none";
-  document.getElementById("movies").style.display = "block";
-}
+<div id="movies">
 
-function showPlaylist(playlistId, creatorName) {
-  document.getElementById("playlistViewer").style.display = "block";
+<h2>🍿 Creator Videos</h2>
 
-  document.getElementById("playlistTitle").textContent =
-    "📺 " + creatorName + " Videos";
+<div class="games">
 
-  document.getElementById("playlistFrame").src =
-    "https://www.youtube.com/embed/videoseries?list=" + playlistId;
-}
+<div class="card">
+<div class="emoji">🐸</div>
+<h2>Unspeakable</h2>
+<p>Watch Unspeakable videos</p>
 
-function clickGame() {
-  clicks = clicks + 1;
+<button onclick="showPlaylist(
+'PL7cUhuXpa0_0bFcWDpYmp0X4d3kicfH1k',
+'Unspeakable'
+)">
+▶️ Watch
+</button>
 
-  document.getElementById("clickScore").textContent =
-    "Clicks: " + clicks;
-}
+</div>
 
-function guessGame() {
-  let number = Math.floor(Math.random() * 10) + 1;
+<div class="card">
+<div class="emoji">🗣️</div>
+<h2>Joe Bart</h2>
+<p>Watch Joe Bart videos</p>
 
-  let guess = prompt("Guess a number from 1 to 10!");
+<button onclick="showPlaylist(
+'PLRURgcJQ51aU',
+'Joe Bart'
+)">
+▶️ Watch
+</button>
 
-  if (Number(guess) === number) {
-    alert("🎉 YOU GOT IT!");
-  } else {
-    alert("❌ Nope! The number was " + number);
-  }
-}
+</div>
 
-function reactionGame() {
-  document.getElementById("game").style.display = "block";
+<div class="card">
+<div class="emoji">🤣</div>
+<h2>ImBrandonFarris</h2>
+<p>Watch ImBrandonFarris videos</p>
 
-  let box = document.getElementById("reactionBox");
+<button onclick="showPlaylist(
+'PLHk21dlwhpXo',
+'ImBrandonFarris'
+)">
+▶️ Watch
+</button>
 
-  box.style.background = "#9b2226";
-  box.textContent = "🔴 WAIT...";
+</div>
 
-  document.getElementById("reactionText").textContent =
-    "Wait for green!";
+</div>
 
-  document.getElementById("reactionResult").textContent = "";
+<div
+class="movie-player"
+id="playlistViewer"
+style="display:none;">
 
-  reactionReady = false;
+<h2 id="playlistTitle">📺 Videos</h2>
 
-  clearTimeout(reactionTimer);
+<iframe
+id="playlistFrame"
+src=""
+title="Creator Playlist"
+allowfullscreen>
+</iframe>
 
-  reactionTimer = setTimeout(function() {
-    reactionReady = true;
+</div>
 
-    reactionStart = performance.now();
-
-    box.style.background = "#168a3a";
-    box.textContent = "🟢 CLICK!";
-
-    document.getElementById("reactionText").textContent =
-      "CLICK NOW!";
-  }, Math.floor(Math.random() * 3000) + 1500);
-}
-
-function reactionClick() {
-  let box = document.getElementById("reactionBox");
-
-  if (!reactionReady) {
-    if (box.textContent === "🔴 WAIT...") {
-      clearTimeout(reactionTimer);
-
-      box.style.background = "#9b2226";
-      box.textContent = "❌ TOO EARLY!";
-
-      document.getElementById("reactionText").textContent =
-        "You clicked too early!";
-
-      document.getElementById("reactionResult").textContent =
-        "Press PLAY to try again.";
-    }
-
-    return;
-  }
-
-  let time = Math.round(performance.now() - reactionStart);
-
-  reactionReady = false;
-
-  box.style.background = "#33334a";
-  box.textContent = time + " ms ⚡";
-
-  document.getElementById("reactionText").textContent =
-    "Nice!";
-
-  document.getElementById("reactionResult").textContent =
-    "Press PLAY to try again.";
-}
-
- function openGame(id) {
-  document.querySelectorAll(".arcade-panel").forEach(function(game) {
-    game.style.display = "none";
-  });
-
-  document.getElementById(id).style.display = "block";
-}
-
-/* 🪨📄✂️ ROCK PAPER SCISSORS */
-
-let rpsYou = 0;
-let rpsComputer = 0;
-
-function playRPS(choice) {
-  let choices = ["rock", "paper", "scissors"];
-  let computer = choices[Math.floor(Math.random() * 3)];
-
-  let result;
-
-  if (choice === computer) {
-    result = "🤝 DRAW!";
-  } else if (
-    (choice === "rock" && computer === "scissors") ||
-    (choice === "paper" && computer === "rock") ||
-    (choice === "scissors" && computer === "paper")
-  ) {
-    rpsYou++;
-    result = "🎉 YOU WIN!";
-  } else {
-    rpsComputer++;
-    result = "💀 COMPUTER WINS!";
-  }
-
-  document.getElementById("rpsResult").textContent =
-    result + " Computer chose " + computer;
-
-  document.getElementById("rpsScore").textContent =
-    "You: " + rpsYou + " | Computer: " + rpsComputer;
-}
-
-/* 🃏 MEMORY MATCH */
-
-let memoryFirst = null;
-let memoryLocked = false;
-
-function startMemory() {
-  let symbols = [
-    "🍕","🍕","🚀","🚀",
-    "🐸","🐸","🔥","🔥",
-    "🎮","🎮","👽","👽",
-    "⚡","⚡","🍔","🍔"
-  ];
-
-  symbols.sort(function() {
-    return Math.random() - 0.5;
-  });
-
-  memoryFirst = null;
-  memoryLocked = false;
-
-  let grid = document.getElementById("memoryGrid");
-  grid.innerHTML = "";
-
-  symbols.forEach(function(symbol) {
-    let card = document.createElement("button");
-
-    card.className = "memory-card";
-    card.textContent = "❓";
-    card.dataset.symbol = symbol;
-
-    card.onclick = function() {
-      if (memoryLocked || card.classList.contains("matched")) {
-        return;
-      }
-
-      card.textContent = symbol;
-
-      if (memoryFirst === null) {
-        memoryFirst = card;
-        return;
-      }
-
-      if (memoryFirst.dataset.symbol === symbol) {
-        memoryFirst.classList.add("matched");
-        card.classList.add("matched");
-        memoryFirst = null;
-      } else {
-        memoryLocked = true;
-
-        let first = memoryFirst;
-
-        setTimeout(function() {
-          first.textContent = "❓";
-          card.textContent = "❓";
-          memoryFirst = null;
-          memoryLocked = false;
-        }, 700);
-      }
-    };
-
-    grid.appendChild(card);
-  });
-} 
-
- <!-- 🐍 SNAKE -->
-
-<div id="snakeGame" style="display:none; margin-top:30px; padding:25px; background:#171725; border-radius:20px;">
-
-  <h2>🐍 Snake</h2>
-
-  <p id="snakeScore">Score: 0</p>
-
-  <canvas
-    id="snakeCanvas"
-    width="400"
-    height="400"
-    style="background:#0b0b12; border:2px solid #4b4bff; max-width:100%; touch-action:none;">
-  </canvas>
-
-  <br><br>
-
-  <button onclick="startSnake()">🔄 START / RESTART</button>
-
-  <p>⬆️ ⬇️ ⬅️ ➡️ Use the arrow keys</p>
+</div>
 
 </div>
 
 <script>
 
-let snake = [];
-let snakeFood = {};
-let snakeDirection = "right";
-let snakeNextDirection = "right";
-let snakeTimer = null;
-let snakeScore = 0;
+/* =========================
+   PAGE NAVIGATION
+========================= */
 
-function startSnake() {
+function gamesPage(){
 
-  clearInterval(snakeTimer);
+document.getElementById("home").style.display="block";
+document.getElementById("games").style.display="block";
+document.getElementById("movies").style.display="none";
+document.getElementById("notes").style.display="none";
 
-  snake = [
-    {x: 200, y: 200},
-    {x: 180, y: 200},
-    {x: 160, y: 200}
-  ];
-
-  snakeDirection = "right";
-  snakeNextDirection = "right";
-  snakeScore = 0;
-
-  document.getElementById("snakeScore").textContent =
-    "Score: 0";
-
-  spawnSnakeFood();
-  drawSnake();
-
-  snakeTimer = setInterval(
-    updateSnake,
-    120
-  );
 }
 
+function moviesPage(){
 
-function spawnSnakeFood() {
+document.getElementById("home").style.display="none";
+document.getElementById("games").style.display="none";
+document.getElementById("movies").style.display="block";
+document.getElementById("notes").style.display="none";
 
-  snakeFood = {
-    x: Math.floor(Math.random() * 20) * 20,
-    y: Math.floor(Math.random() * 20) * 20
-  };
-
-  for (let part of snake) {
-
-    if (
-      part.x === snakeFood.x &&
-      part.y === snakeFood.y
-    ) {
-
-      spawnSnakeFood();
-      return;
-    }
-  }
 }
 
+function notesPage(){
 
-function updateSnake() {
+document.getElementById("home").style.display="none";
+document.getElementById("games").style.display="none";
+document.getElementById("movies").style.display="none";
+document.getElementById("notes").style.display="block";
 
-  snakeDirection = snakeNextDirection;
+document.getElementById("notesBox").value =
+localStorage.getItem("atsNotes") || "";
 
-  let head = {
-    x: snake[0].x,
-    y: snake[0].y
-  };
-
-
-  if (snakeDirection === "up") {
-    head.y -= 20;
-  }
-
-  if (snakeDirection === "down") {
-    head.y += 20;
-  }
-
-  if (snakeDirection === "left") {
-    head.x -= 20;
-  }
-
-  if (snakeDirection === "right") {
-    head.x += 20;
-  }
-
-
-  /* WALL COLLISION */
-
-  if (
-    head.x < 0 ||
-    head.x >= 400 ||
-    head.y < 0 ||
-    head.y >= 400
-  ) {
-
-    snakeGameOver();
-    return;
-  }
-
-
-  /* BODY COLLISION */
-
-  for (let part of snake) {
-
-    if (
-      head.x === part.x &&
-      head.y === part.y
-    ) {
-
-      snakeGameOver();
-      return;
-    }
-  }
-
-
-  snake.unshift(head);
-
-
-  /* FOOD */
-
-  if (
-    head.x === snakeFood.x &&
-    head.y === snakeFood.y
-  ) {
-
-    snakeScore += 10;
-
-    document.getElementById("snakeScore").textContent =
-      "Score: " + snakeScore;
-
-    spawnSnakeFood();
-
-  } else {
-
-    snake.pop();
-
-  }
-
-
-  drawSnake();
 }
 
+/* =========================
+   NOTES
+========================= */
 
-function drawSnake() {
+function saveNotes(){
 
-  let canvas =
-    document.getElementById("snakeCanvas");
+let notes=document.getElementById("notesBox").value;
 
-  if (!canvas) return;
+localStorage.setItem("atsNotes",notes);
 
-  let ctx =
-    canvas.getContext("2d");
+document.getElementById("notesStatus").textContent =
+"✅ Notes saved!";
 
-  ctx.clearRect(
-    0,
-    0,
-    400,
-    400
-  );
-
-
-  /* FOOD */
-
-  ctx.fillStyle = "#ff3333";
-
-  ctx.fillRect(
-    snakeFood.x,
-    snakeFood.y,
-    18,
-    18
-  );
-
-
-  /* SNAKE */
-
-  for (let i = 0; i < snake.length; i++) {
-
-    if (i === 0) {
-      ctx.fillStyle = "#66ff66";
-    } else {
-      ctx.fillStyle = "#22aa44";
-    }
-
-    ctx.fillRect(
-      snake[i].x,
-      snake[i].y,
-      18,
-      18
-    );
-  }
 }
 
+function clearNotes(){
 
-function snakeGameOver() {
+document.getElementById("notesBox").value="";
 
-  clearInterval(snakeTimer);
+localStorage.removeItem("atsNotes");
 
-  alert(
-    "🐍 GAME OVER!\n\nScore: " +
-    snakeScore
-  );
+document.getElementById("notesStatus").textContent =
+"🗑️ Notes cleared!";
+
 }
 
+/* =========================
+   WALLPAPERS
+========================= */
 
-/* KEYBOARD CONTROLS */
+function wallpaperPicker(){
+
+let choice=prompt(
+"🎨 Choose a wallpaper:\n\n"+
+"1 = 🦈 Shark\n"+
+"2 = 🐆 Leopard\n"+
+"3 = 🤝 Hands\n"+
+"4 = 🌕 Homer Moon\n"+
+"5 = 🚗 SpongeBob & Patrick"
+);
+
+let wallpapers={
+"1":"shark.webp",
+"2":"leopard.webp",
+"3":"hands.webp",
+"4":"homer-moon.webp",
+"5":"spongebob-cars.webp"
+};
+
+if(wallpapers[choice]){
+
+document.body.style.backgroundImage=
+"url('"+wallpapers[choice]+"')";
+
+document.body.style.backgroundSize="cover";
+document.body.style.backgroundPosition="center";
+document.body.style.backgroundAttachment="fixed";
+
+}else{
+
+alert("❌ Invalid choice!");
+
+}
+
+}
+
+/* =========================
+   CLICKER
+========================= */
+
+let clicks=0;
+
+function clickGame(){
+
+clicks++;
+
+document.getElementById("clickScore").textContent=
+"Clicks: "+clicks;
+
+}
+
+/* =========================
+   GUESS NUMBER
+========================= */
+
+function guessGame(){
+
+let number=Math.floor(Math.random()*10)+1;
+
+let guess=prompt(
+"Guess a number from 1 to 10!"
+);
+
+if(Number(guess)===number){
+
+alert("🎉 YOU GOT IT!");
+
+}else{
+
+alert(
+"❌ Nope! The number was "+number
+);
+
+}
+
+}
+
+/* =========================
+   CALCULATOR
+========================= */
+
+function calculatorGame(){
+
+let first=Number(
+prompt("Enter the first number:")
+);
+
+let operator=prompt(
+"Enter +, -, *, or /:"
+);
+
+let second=Number(
+prompt("Enter the second number:")
+);
+
+if(isNaN(first)||isNaN(second)){
+
+alert("❌ Please enter numbers!");
+return;
+
+}
+
+if(operator==="+"){
+
+alert("🧮 Answer: "+(first+second));
+
+}else if(operator==="-"){
+
+alert("🧮 Answer: "+(first-second));
+
+}else if(operator==="*"){
+
+alert("🧮 Answer: "+(first*second));
+
+}else if(operator==="/"){
+
+if(second===0){
+
+alert("❌ Can't divide by zero!");
+
+}else{
+
+alert("🧮 Answer: "+(first/second));
+
+}
+
+}else{
+
+alert("❌ Invalid operator!");
+
+}
+
+}
+
+/* =========================
+   OPEN GAME
+========================= */
+
+function openGame(id){
+
+document.querySelectorAll(".arcade-panel")
+.forEach(function(game){
+
+game.style.display="none";
+
+});
+
+document.getElementById(id).style.display="block";
+
+}
+
+/* =========================
+   REACTION TEST
+========================= */
+
+let reactionReady=false;
+let reactionStart=0;
+let reactionTimer=null;
+
+function reactionGame(){
+
+document.getElementById("game").style.display="block";
+
+let box=document.getElementById("reactionBox");
+
+box.style.background="#9b2226";
+box.textContent="🔴 WAIT...";
+
+document.getElementById("reactionText").textContent=
+"Wait for green!";
+
+document.getElementById("reactionResult").textContent="";
+
+reactionReady=false;
+
+clearTimeout(reactionTimer);
+
+reactionTimer=setTimeout(function(){
+
+reactionReady=true;
+
+reactionStart=performance.now();
+
+box.style.background="#168a3a";
+
+box.textContent="🟢 CLICK!";
+
+document.getElementById("reactionText").textContent=
+"CLICK NOW!";
+
+},Math.floor(Math.random()*3000)+1500);
+
+}
+
+function reactionClick(){
+
+if(!reactionReady){
+
+return;
+
+}
+
+let time=Math.round(
+performance.now()-reactionStart
+);
+
+reactionReady=false;
+
+let box=document.getElementById("reactionBox");
+
+box.style.background="#33334a";
+
+box.textContent=time+" ms ⚡";
+
+document.getElementById("reactionText").textContent=
+"Nice!";
+
+document.getElementById("reactionResult").textContent=
+"Press PLAY to try again.";
+
+}
+
+/* =========================
+   ROCK PAPER SCISSORS
+========================= */
+
+let rpsYou=0;
+let rpsComputer=0;
+
+function playRPS(choice){
+
+let choices=[
+"rock",
+"paper",
+"scissors"
+];
+
+let computer=
+choices[Math.floor(Math.random()*3)];
+
+let result="";
+
+if(choice===computer){
+
+result="🤝 DRAW!";
+
+}else if(
+
+(choice==="rock"&&computer==="scissors")||
+(choice==="paper"&&computer==="rock")||
+(choice==="scissors"&&computer==="paper")
+
+){
+
+rpsYou++;
+
+result="🎉 YOU WIN!";
+
+}else{
+
+rpsComputer++;
+
+result="💀 COMPUTER WINS!";
+
+}
+
+document.getElementById("rpsResult").textContent=
+result+" Computer chose "+computer;
+
+document.getElementById("rpsScore").textContent=
+"You: "+rpsYou+
+" | Computer: "+rpsComputer;
+
+}
+
+/* =========================
+   MEMORY
+========================= */
+
+let memoryFirst=null;
+let memoryLocked=false;
+
+function startMemory(){
+
+let symbols=[
+"🍕","🍕",
+"🚀","🚀",
+"🐸","🐸",
+"🔥","🔥",
+"🎮","🎮",
+"👽","👽",
+"⚡","⚡",
+"🍔","🍔"
+];
+
+symbols.sort(function(){
+return Math.random()-0.5;
+});
+
+memoryFirst=null;
+memoryLocked=false;
+
+let grid=
+document.getElementById("memoryGrid");
+
+grid.innerHTML="";
+
+symbols.forEach(function(symbol){
+
+let card=
+document.createElement("button");
+
+card.className="memory-card";
+
+card.textContent="❓";
+
+card.dataset.symbol=symbol;
+
+card.onclick=function(){
+
+if(
+memoryLocked||
+card.classList.contains("matched")
+){
+
+return;
+
+}
+
+card.textContent=symbol;
+
+if(memoryFirst===null){
+
+memoryFirst=card;
+
+return;
+
+}
+
+if(
+memoryFirst.dataset.symbol===symbol
+){
+
+memoryFirst.classList.add("matched");
+
+card.classList.add("matched");
+
+memoryFirst=null;
+
+}else{
+
+memoryLocked=true;
+
+let first=memoryFirst;
+
+setTimeout(function(){
+
+first.textContent="❓";
+
+card.textContent="❓";
+
+memoryFirst=null;
+
+memoryLocked=false;
+
+},700);
+
+}
+
+};
+
+grid.appendChild(card);
+
+});
+
+}
+
+/* =========================
+   SNAKE
+========================= */
+
+let snake=[];
+let snakeFood={};
+let snakeDirection="right";
+let snakeNextDirection="right";
+let snakeTimer=null;
+let snakeScore=0;
+
+function startSnake(){
+
+clearInterval(snakeTimer);
+
+snake=[
+{x:200,y:200},
+{x:180,y:200},
+{x:160,y:200}
+];
+
+snakeDirection="right";
+snakeNextDirection="right";
+snakeScore=0;
+
+document.getElementById("snakeScore").textContent=
+"Score: 0";
+
+spawnSnakeFood();
+
+drawSnake();
+
+snakeTimer=setInterval(
+updateSnake,
+120
+);
+
+}
+
+function spawnSnakeFood(){
+
+do{
+
+snakeFood={
+x:Math.floor(Math.random()*20)*20,
+y:Math.floor(Math.random()*20)*20
+};
+
+}while(
+
+snake.some(function(part){
+
+return(
+part.x===snakeFood.x&&
+part.y===snakeFood.y
+);
+
+})
+
+);
+
+}
+
+function updateSnake(){
+
+snakeDirection=snakeNextDirection;
+
+let head={
+x:snake[0].x,
+y:snake[0].y
+};
+
+if(snakeDirection==="up")head.y-=20;
+if(snakeDirection==="down")head.y+=20;
+if(snakeDirection==="left")head.x-=20;
+if(snakeDirection==="right")head.x+=20;
+
+if(
+head.x<0||
+head.x>=400||
+head.y<0||
+head.y>=400
+){
+
+snakeGameOver();
+return;
+
+}
+
+let eating=
+head.x===snakeFood.x&&
+head.y===snakeFood.y;
+
+let body=eating?
+snake:
+snake.slice(0,-1);
+
+if(
+body.some(function(part){
+
+return(
+part.x===head.x&&
+part.y===head.y
+);
+
+})
+){
+
+snakeGameOver();
+return;
+
+}
+
+snake.unshift(head);
+
+if(eating){
+
+snakeScore+=10;
+
+document.getElementById("snakeScore").textContent=
+"Score: "+snakeScore;
+
+spawnSnakeFood();
+
+}else{
+
+snake.pop();
+
+}
+
+drawSnake();
+
+}
+
+function drawSnake(){
+
+let canvas=
+document.getElementById("snakeCanvas");
+
+let ctx=
+canvas.getContext("2d");
+
+ctx.clearRect(
+0,
+0,
+400,
+400
+);
+
+ctx.fillStyle="#ff3333";
+
+ctx.fillRect(
+snakeFood.x,
+snakeFood.y,
+18,
+18
+);
+
+snake.forEach(function(part,index){
+
+ctx.fillStyle=
+index===0?
+"#66ff66":
+"#22aa44";
+
+ctx.fillRect(
+part.x,
+part.y,
+18,
+18
+);
+
+});
+
+}
+
+function snakeGameOver(){
+
+clearInterval(snakeTimer);
+
+snakeTimer=null;
+
+alert(
+"🐍 GAME OVER!\n\nScore: "+
+snakeScore
+);
+
+}
+
+/* SNAKE CONTROLS */
 
 document.addEventListener(
-  "keydown",
-  function(event) {
+"keydown",
+function(event){
 
-    if (event.key === "ArrowUp" &&
-        snakeDirection !== "down") {
+if(
+event.key==="ArrowUp"&&
+snakeDirection!=="down"
+){
 
-      snakeNextDirection = "up";
-    }
+snakeNextDirection="up";
 
-    if (event.key === "ArrowDown" &&
-        snakeDirection !== "up") {
+}
 
-      snakeNextDirection = "down";
-    }
+if(
+event.key==="ArrowDown"&&
+snakeDirection!=="up"
+){
 
-    if (event.key === "ArrowLeft" &&
-        snakeDirection !== "right") {
+snakeNextDirection="down";
 
-      snakeNextDirection = "left";
-    }
+}
 
-    if (event.key === "ArrowRight" &&
-        snakeDirection !== "left") {
+if(
+event.key==="ArrowLeft"&&
+snakeDirection!=="right"
+){
 
-      snakeNextDirection = "right";
-    }
+snakeNextDirection="left";
 
-  }
+}
+
+if(
+event.key==="ArrowRight"&&
+snakeDirection!=="left"
+){
+
+snakeNextDirection="right";
+
+}
+
+});
+
+/* =========================
+   TETRIS
+========================= */
+
+const tetrisShapes=[
+
+[[1,1,1,1]],
+
+[[1,1],[1,1]],
+
+[[0,1,0],[1,1,1]],
+
+[[1,0,0],[1,1,1]],
+
+[[0,0,1],[1,1,1]],
+
+[[1,1,0],[0,1,1]],
+
+[[0,1,1],[1,1,0]]
+
+];
+
+let tetrisBoard=[];
+let tetrisPiece=null;
+let tetrisX=0;
+let tetrisY=0;
+let tetrisScore=0;
+let tetrisTimer=null;
+
+function startTetris(){
+
+clearInterval(tetrisTimer);
+
+tetrisBoard=Array.from(
+{length:20},
+function(){
+return Array(12).fill(0);
+}
 );
-  
+
+tetrisScore=0;
+
+document.getElementById("tetrisScore").textContent=
+"Score: 0";
+
+newTetrisPiece();
+
+drawTetris();
+
+tetrisTimer=setInterval(function(){
+
+if(!moveTetris(0,1)){
+
+lockTetris();
+
+}
+
+drawTetris();
+
+},500);
+
+}
+
+function newTetrisPiece(){
+
+let shape=
+tetrisShapes[
+Math.floor(
+Math.random()*tetrisShapes.length
+)
+];
+
+tetrisPiece=shape.map(function(row){
+
+return row.slice();
+
+});
+
+tetrisX=4;
+tetrisY=0;
+
+if(tetrisCollision()){
+
+clearInterval(tetrisTimer);
+
+tetrisTimer=null;
+
+alert(
+"🧱 GAME OVER!\n\nScore: "+
+tetrisScore
+);
+
+}
+
+}
+
+function tetrisCollision(){
+
+for(
+let y=0;
+y<tetrisPiece.length;
+y++
+){
+
+for(
+let x=0;
+x<tetrisPiece[y].length;
+x++
+){
+
+if(!tetrisPiece[y][x])continue;
+
+let bx=tetrisX+x;
+let by=tetrisY+y;
+
+if(
+bx<0||
+bx>=12||
+by>=20||
+(
+by>=0&&
+tetrisBoard[by][bx]
+)
+){
+
+return true;
+
+}
+
+}
+
+}
+
+return false;
+
+}
+
+function moveTetris(dx,dy){
+
+tetrisX+=dx;
+tetrisY+=dy;
+
+if(tetrisCollision()){
+
+tetrisX-=dx;
+tetrisY-=dy;
+
+return false;
+
+}
+
+return true;
+
+}
+
+function lockTetris(){
+
+for(
+let y=0;
+y<tetrisPiece.length;
+y++
+){
+
+for(
+let x=0;
+x<tetrisPiece[y].length;
+x++
+){
+
+if(tetrisPiece[y][x]){
+
+tetrisBoard[
+tetrisY+y
+][
+tetrisX+x
+]=1;
+
+}
+
+}
+
+}
+
+clearTetrisLines();
+
+newTetrisPiece();
+
+}
+
+function clearTetrisLines(){
+
+for(
+let y=19;
+y>=0;
+y--
+){
+
+if(tetrisBoard[y].every(Boolean)){
+
+tetrisBoard.splice(y,1);
+
+tetrisBoard.unshift(
+Array(12).fill(0)
+);
+
+tetrisScore+=100;
+
+document.getElementById(
+"tetrisScore"
+).textContent=
+"Score: "+tetrisScore;
+
+y++;
+
+}
+
+}
+
+}
+
+function rotateTetris(){
+
+let rotated=[];
+
+for(
+let x=0;
+x<tetrisPiece[0].length;
+x++
+){
+
+let row=[];
+
+for(
+let y=tetrisPiece.length-1;
+y>=0;
+y--
+){
+
+row.push(
+tetrisPiece[y][x]
+);
+
+}
+
+rotated.push(row);
+
+}
+
+let old=tetrisPiece;
+
+tetrisPiece=rotated;
+
+if(tetrisCollision()){
+
+tetrisPiece=old;
+
+}
+
+}
+
+function drawTetris(){
+
+let canvas=
+document.getElementById("tetrisCanvas");
+
+let ctx=
+canvas.getContext("2d");
+
+ctx.clearRect(
+0,
+0,
+240,
+400
+);
+
+for(
+let y=0;
+y<20;
+y++
+){
+
+for(
+let x=0;
+x<12;
+x++
+){
+
+if(tetrisBoard[y][x]){
+
+ctx.fillStyle="#4b4bff";
+
+ctx.fillRect(
+x*20,
+y*20,
+19,
+19
+);
+
+}
+
+}
+
+}
+
+if(!tetrisPiece)return;
+
+ctx.fillStyle="#ffcc00";
+
+for(
+let y=0;
+y<tetrisPiece.length;
+y++
+){
+
+for(
+let x=0;
+x<tetrisPiece[y].length;
+x++
+){
+
+if(tetrisPiece[y][x]){
+
+ctx.fillRect(
+(tetrisX+x)*20,
+(tetrisY+y)*20,
+19,
+19
+);
+
+}
+
+}
+
+}
+
+}
+
+/* TETRIS CONTROLS */
+
+document.addEventListener(
+"keydown",
+function(event){
+
+if(
+document.getElementById(
+"tetrisGame"
+).style.display!=="block"
+){
+
+return;
+
+}
+
+if(event.key==="ArrowLeft"){
+
+moveTetris(-1,0);
+drawTetris();
+
+}
+
+if(event.key==="ArrowRight"){
+
+moveTetris(1,0);
+drawTetris();
+
+}
+
+if(event.key==="ArrowDown"){
+
+if(!moveTetris(0,1)){
+
+lockTetris();
+
+}
+
+drawTetris();
+
+}
+
+if(event.key==="ArrowUp"){
+
+rotateTetris();
+
+drawTetris();
+
+}
+
+});
+
+/* =========================
+   PONG
+========================= */
+
+let pongTimer=null;
+
+let pongPlayerY=115;
+let pongComputerY=115;
+
+let pongBallX=250;
+let pongBallY=150;
+
+let pongBallDX=4;
+let pongBallDY=3;
+
+let pongPlayerScore=0;
+let pongComputerScore=0;
+
+function startPong(){
+
+clearInterval(pongTimer);
+
+pongPlayerY=115;
+pongComputerY=115;
+
+pongPlayerScore=0;
+pongComputerScore=0;
+
+resetPongBall();
+
+updatePongScore();
+
+drawPong();
+
+pongTimer=setInterval(
+updatePong,
+16
+);
+
+}
+
+function resetPongBall(){
+
+pongBallX=250;
+pongBallY=150;
+
+pongBallDX=
+Math.random()>0.5?
+4:
+-4;
+
+pongBallDY=
+Math.random()>0.5?
+3:
+-3;
+
+}
+
+function updatePongScore(){
+
+document.getElementById(
+"pongScore"
+).textContent=
+"You: "+
+pongPlayerScore+
+" | Computer: "+
+pongComputerScore;
+
+}
+
+function updatePong(){
+
+pongBallX+=pongBallDX;
+pongBallY+=pongBallDY;
+
+if(
+pongBallY<=7||
+pongBallY>=293
+){
+
+pongBallDY*=-1;
+
+}
+
+/* COMPUTER */
+
+pongComputerY+=
+(
+pongBallY-
+35-
+pongComputerY
+)*0.08;
+
+pongComputerY=Math.max(
+0,
+Math.min(
+230,
+pongComputerY
+)
+);
+
+/* PLAYER HIT */
+
+if(
+pongBallX<=25&&
+pongBallX>=10&&
+pongBallY>=pongPlayerY&&
+pongBallY<=pongPlayerY+70
+){
+
+pongBallDX=
+Math.abs(pongBallDX);
+
+}
+
+/* COMPUTER HIT */
+
+if(
+pongBallX>=475&&
+pongBallX<=490&&
+pongBallY>=pongComputerY&&
+pongBallY<=pongComputerY+70
+){
+
+pongBallDX=
+-Math.abs(pongBallDX);
+
+}
+
+/* SCORE */
+
+if(pongBallX<0){
+
+pongComputerScore++;
+
+resetPongBall();
+
+updatePongScore();
+
+}
+
+if(pongBallX>500){
+
+pongPlayerScore++;
+
+resetPongBall();
+
+updatePongScore();
+
+}
+
+drawPong();
+
+}
+
+function drawPong(){
+
+let canvas=
+document.getElementById(
+"pongCanvas"
+);
+
+let ctx=
+canvas.getContext("2d");
+
+ctx.clearRect(
+0,
+0,
+500,
+300
+);
+
+ctx.strokeStyle="white";
+
+ctx.setLineDash(
+[6,6]
+);
+
+ctx.beginPath();
+
+ctx.moveTo(250,0);
+ctx.lineTo(250,300);
+
+ctx.stroke();
+
+ctx.setLineDash([]);
+
+ctx.fillStyle="#4b4bff";
+
+ctx.fillRect(
+10,
+pongPlayerY,
+15,
+70
+);
+
+ctx.fillStyle="#ff4444";
+
+ctx.fillRect(
+475,
+pongComputerY,
+15,
+70
+);
+
+ctx.fillStyle="white";
+
+ctx.beginPath();
+
+ctx.arc(
+pongBallX,
+pongBallY,
+7,
+0,
+Math.PI*2
+);
+
+ctx.fill();
+
+}
+
+/* PONG MOUSE */
+
+document.getElementById(
+"pongCanvas"
+).addEventListener(
+"pointermove",
+function(event){
+
+let canvas=
+document.getElementById(
+"pongCanvas"
+);
+
+let rect=
+canvas.getBoundingClientRect();
+
+let y=
+(event.clientY-rect.top)*
+(canvas.height/rect.height);
+
+pongPlayerY=Math.max(
+0,
+Math.min(
+230,
+y-35
+)
+);
+
+});
+
+/* =========================
+   MOVIES
+========================= */
+
+function showPlaylist(
+playlistId,
+creatorName
+){
+
+document.getElementById(
+"playlistViewer"
+).style.display="block";
+
+document.getElementById(
+"playlistTitle"
+).textContent=
+"📺 "+creatorName+" Videos";
+
+document.getElementById(
+"playlistFrame"
+).src=
+"https://www.youtube.com/embed/videoseries?list="+
+playlistId;
+
+}
 
 </script>
-  
+
 <footer>
-  <h3>🎬 Credits</h3>
-  <p>Website created by Alexander</p>
-  <p>Made with HTML, CSS & JavaScript ❤️</p>
-  <p>Thanks for visiting! 🔥</p>
+
+<h3>🎬 Credits</h3>
+
+<p>Website created by Alexander</p>
+
+<p>Made with HTML, CSS & JavaScript ❤️</p>
+
+<p>Thanks for visiting! 🔥</p>
+
 </footer>
-  
+
 </body>
 </html>
