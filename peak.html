@@ -142,7 +142,9 @@
             report(label);
           }
         }
-        return URL.createObjectURL(new Blob(buffers));
+        var blob = new Blob(buffers);
+console.log(label + " assembled size:", blob.size, "bytes");
+return URL.createObjectURL(blob);
       }
 
       (async function () {
