@@ -605,7 +605,6 @@ function wallpaperPicker() {
 
   // Secret code unlocks the hidden game
   if (choice === "090816") {
-    localStorage.setItem("atsSecretGameUnlocked", "true");
 
     document.getElementById("secretGameCard").style.display = "block";
 
@@ -1875,10 +1874,6 @@ playlistId;
 
 function openPeak() {
   window.open("peak.html", "_blank");
-}  
-
-if (localStorage.getItem("atsSecretGameUnlocked") === "true") {
-  document.getElementById("secretGameCard").style.display = "block";
 }  
 
 </script>
