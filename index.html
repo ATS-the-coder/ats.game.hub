@@ -1876,6 +1876,13 @@ function openPeak() {
   window.open("peak.html", "_blank");
 }  
 
+ // Hide the secret card when this tab is hidden
+document.addEventListener("visibilitychange", function() {
+  if (document.hidden) {
+    document.getElementById("secretGameCard").style.display = "none";
+  }
+}); 
+
 </script>
 
 <footer>
