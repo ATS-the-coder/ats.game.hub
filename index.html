@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+.i<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -165,7 +165,7 @@ footer{
 <button onclick="gamesPage()">🎮 Games</button>
 <button onclick="moviesPage()">🍿 Movies</button>
 <button onclick="notesPage()">📝 Notes</button>
-<button id="shadowgames" onclick="shadowpage()" style="display:none;">shadow777</button>
+<button id="shadowbutton" onclick="openshadowpage()" style="display:none;">shadow777</button>
   
 </header>
 
@@ -662,6 +662,7 @@ function wallpaperPicker() {
   
   // SECRET 2: Hidden extra-games page
   if (choice.trim() === "shadow777") {
+        unlockshadow();
     document.getElementById("mainPage").style.display = "none";
     document.getElementById("secretPage").style.display = "block";
     return;
