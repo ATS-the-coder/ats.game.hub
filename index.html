@@ -1,4 +1,4 @@
-.i<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -196,11 +196,11 @@ rows="12"></textarea>
 
 </div>
 
-<div id-"shadowpage" style="display:none;"> 
+<div id="shadowpage" style="display:none;"> 
 <h2> shadow777</h2>  
 <p>welcome to the secert game zone...</p>  
 <h3>you've discoverd some thing hidden</h3>  
-</div
+</div>
   
 <!-- GAMES -->
 
@@ -1942,14 +1942,19 @@ document.addEventListener("visibilitychange", function() {
 }); 
 
 function unlockshadow() {
-  doccument.getelementbyid("shadowbutton").style.display = "inline-block";
+  document.getElementById("shadowbutton").style.display = "inline-block";
 }
-  function openshadowpage() {
-  doccument.getelementbyid("home").style.display = "none";  
-    doccument.getelementbyid("games").style.display = "none";  
-    doccument.getelementbyid("notes").style.display = "none";  
-    doccument.getelementbyid("shadowpage").style.display = "block";  
-  }
+
+function openshadowpage() {
+  document.getElementById("mainpage").style.display = "none";
+  document.getElementById("secretPage").style.display = "block";
+}
+
+function closeSecretPage() {
+  document.getElementById("secretPage").style.display = "none";
+  document.getElementById("mainpage").style.display = "block";
+  gamesPage();
+}
   
 </script>
 
