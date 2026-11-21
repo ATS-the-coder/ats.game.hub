@@ -661,9 +661,11 @@ function wallpaperPicker() {
   } 
   
   // SECRET 2: Hidden extra-games page
-if (choice.trim().toLowerCase() === "shadow777") {
-    document.getElementById("shadowButton").style.display = "inline-block";
-    alert("Secret unlocked!");
+if (choice !== null && choice.trim().toLowerCase() === "shadow777") {
+    document.getElementById("shadowbutton").style.display = "inline-block";
+    alert("🌑 SHADOW777 UNLOCKED!");
+    return;
+}
 
     document.getElementById("mainPage").style.display = "none";
     document.getElementById("shadowPage").style.display = "block";
