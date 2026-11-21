@@ -661,15 +661,14 @@ function wallpaperPicker() {
   } 
   
   // SECRET 2: Hidden extra-games page
-  if (choice.trim().tolowercase() === "shadow777") {
-    doccument.getelementbyid("shadowbutton").display = "inline-block";
-    alert("secret unlocked!");
-  }
-        unlockshadow();
+if (choice.trim().toLowerCase() === "shadow777") {
+    document.getElementById("shadowButton").style.display = "inline-block";
+    alert("Secret unlocked!");
+
     document.getElementById("mainPage").style.display = "none";
     document.getElementById("secretPage").style.display = "block";
     return;
-  }
+}
 
   let wallpapers = {
     "1": "shark.webp",
