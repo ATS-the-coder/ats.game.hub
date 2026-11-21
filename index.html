@@ -643,34 +643,27 @@ function wallpaperPicker() {
     "🔒 Or enter the secret code!"
   );
 
-  // Secret code unlocks the hidden game
+  if (choice === null) return;
+
+  choice = choice.trim().toLowerCase();
+
   if (choice === "090816") {
-
     document.getElementById("secretGameCard").style.display = "block";
-
     alert("🔓 SECRET UNLOCKED! Check the Games page!");
     return;
   }
 
-   if (choice === "alexisthebest") {
-
+  if (choice === "alexisthebest") {
     document.getElementById("secretGameCard2").style.display = "block";
-
     alert("🔓 SECRET UNLOCKED! Check the Games page!");
     return;
-  } 
-  
-  // SECRET 2: Hidden extra-games page
-if (choice !== null && choice.trim().toLowerCase() === "shadow777") {
+  }
+
+  if (choice === "shadow777") {
     document.getElementById("shadowbutton").style.display = "inline-block";
     alert("🌑 SHADOW777 UNLOCKED!");
     return;
-}
-
-    document.getElementById("mainPage").style.display = "none";
-    document.getElementById("shadowPage").style.display = "block";
-    return;
-}
+  }
 
   let wallpapers = {
     "1": "shark.webp",
@@ -683,11 +676,10 @@ if (choice !== null && choice.trim().toLowerCase() === "shadow777") {
   if (wallpapers[choice]) {
     document.body.style.backgroundImage =
       "url('" + wallpapers[choice] + "')";
-
     document.body.style.backgroundSize = "cover";
     document.body.style.backgroundPosition = "center";
     document.body.style.backgroundAttachment = "fixed";
-  } else if (choice !== null) {
+  } else {
     alert("❌ Invalid choice!");
   }
 }
